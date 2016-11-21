@@ -1,19 +1,13 @@
 package lukaszlusz.sql;
 
-import lukaszlusz.config.ConfigReader;
-import lukaszlusz.config.DbInfo;
-
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Statement;
 
-public class TableCreator {
-    public static void CREATE_TABLES() {
-        ConfigReader configReader = new ConfigReader();
-        DbInfo dbInfo = configReader.getDbInfo();
-        DBConnector dbConnector = new DBConnectorMySQL(dbInfo);
-        try {
-            Connection connection = dbConnector.getConnection();
 
+public class TableCreator {
+    public static void CREATE_TABLES(Connection connection) {
+        try {
             Statement statement = connection.createStatement();
 
             statement.execute("CREATE TABLE Boxes(" +
@@ -33,16 +27,13 @@ public class TableCreator {
                     " Category VARCHAR(30)," +
                     " Status VARCHAR(30), " +
                     "Description VARCHAR(255)," +
-                    " Box int, PRIMARY KEY (ID))");
+                    " Box int, PRIMARY KEY (ID));");
 
             statement.execute("CREATE TABLE Statuses(Status VARCHAR(30)," +
-                    " PRIMARY KEY (Status))");
+                    " PRIMARY KEY (Status));");
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-        }
-        finally {
-            dbConnector.closeConnection();
         }
     }
 }
