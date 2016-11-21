@@ -15,12 +15,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class ConfigReader {
+    String filepath = "dbconfig.xml";
     private boolean dbInfoLoaded = false;
-    private DbInfo dbInfo;
-
+    private DbInfo dbInfo = new DbInfo();
 
     private void loadDbInfo() throws IOException, ParserConfigurationException, SAXException {
-        File xmlFile = new File("dbconfig.xml");
+        File xmlFile = new File(filepath);
         if(xmlFile.exists() == false || xmlFile.isDirectory()) throw new FileNotFoundException();
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -48,13 +48,14 @@ public class ConfigReader {
             try {
                 loadDbInfo();
             } catch (IOException e) {
-                e.printStackTrace();
-                //TODO:open input dialog
+                System.err.print("Brak pliku konfiguracyjnego");
+                //TODO: open input dialog and create configuration file
 
-            } catch (ParserConfigurationException e) {
+            } catch (ParserConfigurationException | SAXException e) {
                 e.printStackTrace();
-            } catch (SAXException e) {
-                e.printStackTrace();
+                //TODO: errorbox
+                //TODO: open input dialog and create configuration file and try load one more time
+                System.exit(-1);
             }
         }
         return dbInfo;

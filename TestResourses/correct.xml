@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<database>
+	<dbinfo id="1">
+		<address>127.0.0.1</address>
+		<dbname>test</dbname>
+		<port>3306</port>
+		<user>username</user>
+		<password>password</password>
+	</dbinfo>
+</database>
