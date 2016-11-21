@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import lukaszlusz.GUI.ErrorBox;
+
 public class ConfigReader {
     String filepath = "dbconfig.xml";
     private boolean dbInfoLoaded = false;
@@ -53,7 +55,7 @@ public class ConfigReader {
 
             } catch (ParserConfigurationException | SAXException e) {
                 e.printStackTrace();
-                //TODO: errorbox
+                new ErrorBox("Błąd", "Błąd podczas odczytu pliku konfiguracyjnego");
                 //TODO: open input dialog and create configuration file and try load one more time
                 System.exit(-1);
             }

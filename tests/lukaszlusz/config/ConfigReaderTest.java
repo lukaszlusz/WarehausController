@@ -1,7 +1,6 @@
 package lukaszlusz.config;
 
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
 import static org.junit.Assert.*;
 
