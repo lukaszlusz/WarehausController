@@ -1,4 +1,4 @@
-package com.github.lukaszlusz.warehaus.sql;
+package lukaszlusz.sql;
 
 import java.sql.*;
 
