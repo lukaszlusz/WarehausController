@@ -1,22 +1,16 @@
 package lukaszlusz.sql;
 
+import lukaszlusz.config.DbInfo;
+
 import java.sql.*;
 
 public abstract class DBConnector {
     protected final String jdbcDriver;
-    protected String address;
-    protected String dbName;
-    protected String port;
-    protected String user;
-    protected String password;
+    protected DbInfo dbInfo;
     protected Connection connection;
 
-    public DBConnector(String address, String dbName, String port, String user, String password, String jdbcDriver) {
-        this.address = address;
-        this.dbName = dbName;
-        this.port = port;
-        this.user = user;
-        this.password = password;
+    public DBConnector(DbInfo dbInfo, String jdbcDriver) {
+        this.dbInfo = dbInfo;
         this.jdbcDriver = jdbcDriver;
     }
 
@@ -25,7 +19,7 @@ public abstract class DBConnector {
     protected void connect() throws SQLException{
         try {
             Class.forName(jdbcDriver);
-            connection = DriverManager.getConnection(createURL(),user,password);
+            connection = DriverManager.getConnection(createURL(),dbInfo.user,dbInfo.password);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

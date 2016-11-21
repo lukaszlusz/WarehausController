@@ -4,6 +4,15 @@ public class DbInfo {
     public String address;
     public String dbName;
     public String port;
+
+    public DbInfo(String address, String dbName, String port, String user, String password) {
+        this.address = address;
+        this.dbName = dbName;
+        this.port = port;
+        this.user = user;
+        this.password = password;
+    }
+
     public String user;
     public String password;
 
