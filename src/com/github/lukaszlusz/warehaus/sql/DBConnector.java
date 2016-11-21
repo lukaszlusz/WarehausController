@@ -39,4 +39,10 @@ public abstract class DBConnector {
     public void closeConnection() throws SQLException {
         if (connection != null) connection.close();
     }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        if (connection != null) connection.close();
+    }
 }
