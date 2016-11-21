@@ -3,11 +3,10 @@ package lukaszlusz.GUI;
 import javax.swing.*;
 
 public class ErrorBox {
-    private String title;
+    private String title = "Błąd";
     private String message;
 
-    public ErrorBox(String title, String message) {
-        this.title = title;
+    public ErrorBox(String message) {
         this.message = message;
         showOneMoreTime();
     }

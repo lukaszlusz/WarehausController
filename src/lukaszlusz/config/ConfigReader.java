@@ -55,7 +55,7 @@ public class ConfigReader {
 
             } catch (ParserConfigurationException | SAXException e) {
                 e.printStackTrace();
-                new ErrorBox("Błąd", "Błąd podczas odczytu pliku konfiguracyjnego");
+                new ErrorBox("Błąd podczas odczytu pliku konfiguracyjnego");
                 //TODO: open input dialog and create configuration file and try load one more time
                 System.exit(-1);
             }

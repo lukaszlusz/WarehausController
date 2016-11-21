@@ -1,5 +1,6 @@
 package lukaszlusz.sql;
 
+import lukaszlusz.GUI.ErrorBox;
 import lukaszlusz.config.DbInfo;
 
 import java.sql.*;
@@ -30,8 +31,15 @@ public abstract class DBConnector {
         return connection;
     }
     
-    public void closeConnection() throws SQLException {
-        if (connection != null) connection.close();
+    public void closeConnection() {
+        if (connection != null)
+            try {
+                connection.close();
+        }catch (SQLException e) {
+                e.printStackTrace();
+                new ErrorBox("Nie udało się poprawnie zakończyć połaczenia");
+            }
+
     }
 
     @Override

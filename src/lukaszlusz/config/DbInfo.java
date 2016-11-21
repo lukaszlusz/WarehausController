@@ -5,6 +5,8 @@ public class DbInfo {
     public String dbName;
     public String port;
 
+    public DbInfo() {}
+
     public DbInfo(String address, String dbName, String port, String user, String password) {
         this.address = address;
         this.dbName = dbName;
