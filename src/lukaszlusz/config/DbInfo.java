@@ -4,6 +4,9 @@ public class DbInfo {
     public String address;
     public String dbName;
     public String port;
+    public String user;
+    public String password;
+
 
     public DbInfo() {}
 
@@ -14,9 +17,6 @@ public class DbInfo {
         this.user = user;
         this.password = password;
     }
-
-    public String user;
-    public String password;
 
     @Override
     public boolean equals(Object o) {

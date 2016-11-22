@@ -18,12 +18,7 @@ public abstract class DBConnector {
     protected abstract String createURL();
 
     protected void connect() throws SQLException{
-        try {
-            Class.forName(jdbcDriver);
-            connection = DriverManager.getConnection(createURL(),dbInfo.user,dbInfo.password);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+       tryToConnect();
     }
     
     public Connection getConnection() throws SQLException {
@@ -32,14 +27,26 @@ public abstract class DBConnector {
     }
     
     public void closeConnection() {
-        if (connection != null)
-            try {
-                connection.close();
-        }catch (SQLException e) {
-                e.printStackTrace();
-                new ErrorBox("Nie udało się poprawnie zakończyć połaczenia");
-            }
+        if (connection != null) tryToCloseConnection();
+    }
 
+    private void tryToConnect() throws SQLException {
+        try {
+            Class.forName(jdbcDriver);
+            connection = DriverManager.getConnection(createURL(),dbInfo.user,dbInfo.password);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void tryToCloseConnection() {
+        try {
+            connection.close();
+        }catch (SQLException e) {
+            e.printStackTrace();
+            new ErrorBox("Nie udało się poprawnie zakończyć połaczenia");
+        }
     }
 
     @Override

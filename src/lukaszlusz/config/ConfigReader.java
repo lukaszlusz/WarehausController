@@ -21,15 +21,49 @@ public class ConfigReader {
     private boolean dbInfoLoaded = false;
     private DbInfo dbInfo = new DbInfo();
 
+    public DbInfo getDbInfo() {
+        tryToLoadDbInfo();
+        return dbInfo;
+    }
+
+    private void tryToLoadDbInfo() {
+        if (dbInfoLoaded == false) {
+            try {
+                loadDbInfo();
+            } catch (IOException e) {
+                System.err.print("Brak pliku konfiguracyjnego");
+                //TODO: open input dialog and create configuration file
+
+            } catch (ParserConfigurationException | SAXException e) {
+                e.printStackTrace();
+                new ErrorBox("Błąd podczas odczytu pliku konfiguracyjnego");
+                //TODO: open input dialog and create configuration file and try load one more time
+                System.exit(-1);
+            }
+        }
+
+    }
+
     private void loadDbInfo() throws IOException, ParserConfigurationException, SAXException {
         File xmlFile = new File(filepath);
-        if(xmlFile.exists() == false || xmlFile.isDirectory()) throw new FileNotFoundException();
+        checkIfFileExist(xmlFile);
+        Document document = getParsedDocument(xmlFile);
+        readDbInfoFromDocument(document);
+    }
 
+    private void checkIfFileExist(File xmlFile) throws FileNotFoundException {
+        if(xmlFile.exists() == false || xmlFile.isDirectory()) throw new FileNotFoundException();
+    }
+
+    private Document getParsedDocument(File xmlFile) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = dbFactory.newDocumentBuilder();
         Document document = documentBuilder.parse(xmlFile);
         document.getDocumentElement().normalize();
+        return document;
+    }
 
+    private void readDbInfoFromDocument(Document document) {
         NodeList nodeList = document.getElementsByTagName("dbinfo");
         Node node = nodeList.item(0);
         if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -45,21 +79,4 @@ public class ConfigReader {
         }
     }
 
-    public DbInfo getDbInfo() {
-        if (dbInfoLoaded == false) {
-            try {
-                loadDbInfo();
-            } catch (IOException e) {
-                System.err.print("Brak pliku konfiguracyjnego");
-                //TODO: open input dialog and create configuration file
-
-            } catch (ParserConfigurationException | SAXException e) {
-                e.printStackTrace();
-                new ErrorBox("Błąd podczas odczytu pliku konfiguracyjnego");
-                //TODO: open input dialog and create configuration file and try load one more time
-                System.exit(-1);
-            }
-        }
-        return dbInfo;
-    }
 }
