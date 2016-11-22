@@ -22,12 +22,11 @@ public class ConfigReader {
     private DbInfo dbInfo = new DbInfo();
 
     public DbInfo getDbInfo() {
-        tryToLoadDbInfo();
+        if (dbInfoLoaded == false) tryToLoadDbInfo();
         return dbInfo;
     }
 
     private void tryToLoadDbInfo() {
-        if (dbInfoLoaded == false) {
             try {
                 loadDbInfo();
             } catch (IOException e) {
@@ -40,8 +39,6 @@ public class ConfigReader {
                 //TODO: open input dialog and create configuration file and try load one more time
                 System.exit(-1);
             }
-        }
-
     }
 
     private void loadDbInfo() throws IOException, ParserConfigurationException, SAXException {
