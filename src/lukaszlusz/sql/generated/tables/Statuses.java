@@ -10,7 +10,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import lukaszlusz.sql.generated.Keys;
-import lukaszlusz.sql.generated.WhControllerDatabase;
+import lukaszlusz.sql.generated.Warehousedb;
 import lukaszlusz.sql.generated.tables.records.StatusesRecord;
 
 import org.jooq.Field;
@@ -34,10 +34,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Statuses extends TableImpl<StatusesRecord> {
 
-    private static final long serialVersionUID = 1628067021;
+    private static final long serialVersionUID = 527815174;
 
     /**
-     * The reference instance of <code>test.statuses</code>
+     * The reference instance of <code>warehousedb.statuses</code>
      */
     public static final Statuses STATUSES = new Statuses();
 
@@ -50,19 +50,19 @@ public class Statuses extends TableImpl<StatusesRecord> {
     }
 
     /**
-     * The column <code>test.statuses.Status</code>.
+     * The column <code>warehousedb.statuses.Status</code>.
      */
     public final TableField<StatusesRecord, String> STATUS = createField("Status", org.jooq.impl.SQLDataType.VARCHAR.length(30).nullable(false), this, "");
 
     /**
-     * Create a <code>test.statuses</code> table reference
+     * Create a <code>warehousedb.statuses</code> table reference
      */
     public Statuses() {
         this("statuses", null);
     }
 
     /**
-     * Create an aliased <code>test.statuses</code> table reference
+     * Create an aliased <code>warehousedb.statuses</code> table reference
      */
     public Statuses(String alias) {
         this(alias, STATUSES);
@@ -81,7 +81,7 @@ public class Statuses extends TableImpl<StatusesRecord> {
      */
     @Override
     public Schema getSchema() {
-        return WhControllerDatabase.WH_CONTROLLER_DATABASE;
+        return Warehousedb.WAREHOUSEDB;
     }
 
     /**

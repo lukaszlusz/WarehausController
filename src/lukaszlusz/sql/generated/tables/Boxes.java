@@ -10,7 +10,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import lukaszlusz.sql.generated.Keys;
-import lukaszlusz.sql.generated.WhControllerDatabase;
+import lukaszlusz.sql.generated.Warehousedb;
 import lukaszlusz.sql.generated.tables.records.BoxesRecord;
 
 import org.jooq.Field;
@@ -35,10 +35,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Boxes extends TableImpl<BoxesRecord> {
 
-    private static final long serialVersionUID = 1348466340;
+    private static final long serialVersionUID = -2045046015;
 
     /**
-     * The reference instance of <code>test.boxes</code>
+     * The reference instance of <code>warehousedb.boxes</code>
      */
     public static final Boxes BOXES = new Boxes();
 
@@ -51,29 +51,29 @@ public class Boxes extends TableImpl<BoxesRecord> {
     }
 
     /**
-     * The column <code>test.boxes.ID</code>.
+     * The column <code>warehousedb.boxes.ID</code>.
      */
     public final TableField<BoxesRecord, Integer> ID = createField("ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>test.boxes.BarCode</code>.
+     * The column <code>warehousedb.boxes.BarCode</code>.
      */
     public final TableField<BoxesRecord, String> BARCODE = createField("BarCode", org.jooq.impl.SQLDataType.VARCHAR.length(30), this, "");
 
     /**
-     * The column <code>test.boxes.Description</code>.
+     * The column <code>warehousedb.boxes.Description</code>.
      */
     public final TableField<BoxesRecord, String> DESCRIPTION = createField("Description", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "");
 
     /**
-     * Create a <code>test.boxes</code> table reference
+     * Create a <code>warehousedb.boxes</code> table reference
      */
     public Boxes() {
         this("boxes", null);
     }
 
     /**
-     * Create an aliased <code>test.boxes</code> table reference
+     * Create an aliased <code>warehousedb.boxes</code> table reference
      */
     public Boxes(String alias) {
         this(alias, BOXES);
@@ -92,7 +92,7 @@ public class Boxes extends TableImpl<BoxesRecord> {
      */
     @Override
     public Schema getSchema() {
-        return WhControllerDatabase.WH_CONTROLLER_DATABASE;
+        return Warehousedb.WAREHOUSEDB;
     }
 
     /**

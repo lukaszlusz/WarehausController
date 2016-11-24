@@ -10,7 +10,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import lukaszlusz.sql.generated.Keys;
-import lukaszlusz.sql.generated.WhControllerDatabase;
+import lukaszlusz.sql.generated.Warehousedb;
 import lukaszlusz.sql.generated.tables.records.ItemsRecord;
 
 import org.jooq.Field;
@@ -35,10 +35,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Items extends TableImpl<ItemsRecord> {
 
-    private static final long serialVersionUID = -1623401033;
+    private static final long serialVersionUID = 1062297176;
 
     /**
-     * The reference instance of <code>test.items</code>
+     * The reference instance of <code>warehousedb.items</code>
      */
     public static final Items ITEMS = new Items();
 
@@ -51,49 +51,49 @@ public class Items extends TableImpl<ItemsRecord> {
     }
 
     /**
-     * The column <code>test.items.ID</code>.
+     * The column <code>warehousedb.items.ID</code>.
      */
     public final TableField<ItemsRecord, Integer> ID = createField("ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>test.items.Amount</code>.
+     * The column <code>warehousedb.items.Amount</code>.
      */
     public final TableField<ItemsRecord, Integer> AMOUNT = createField("Amount", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>test.items.ItemName</code>.
+     * The column <code>warehousedb.items.ItemName</code>.
      */
     public final TableField<ItemsRecord, String> ITEMNAME = createField("ItemName", org.jooq.impl.SQLDataType.VARCHAR.length(30).nullable(false), this, "");
 
     /**
-     * The column <code>test.items.Category</code>.
+     * The column <code>warehousedb.items.Category</code>.
      */
     public final TableField<ItemsRecord, String> CATEGORY = createField("Category", org.jooq.impl.SQLDataType.VARCHAR.length(30), this, "");
 
     /**
-     * The column <code>test.items.Status</code>.
+     * The column <code>warehousedb.items.Status</code>.
      */
     public final TableField<ItemsRecord, String> STATUS = createField("Status", org.jooq.impl.SQLDataType.VARCHAR.length(30), this, "");
 
     /**
-     * The column <code>test.items.Description</code>.
+     * The column <code>warehousedb.items.Description</code>.
      */
     public final TableField<ItemsRecord, String> DESCRIPTION = createField("Description", org.jooq.impl.SQLDataType.VARCHAR.length(255), this, "");
 
     /**
-     * The column <code>test.items.Box</code>.
+     * The column <code>warehousedb.items.Box</code>.
      */
     public final TableField<ItemsRecord, Integer> BOX = createField("Box", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
     /**
-     * Create a <code>test.items</code> table reference
+     * Create a <code>warehousedb.items</code> table reference
      */
     public Items() {
         this("items", null);
     }
 
     /**
-     * Create an aliased <code>test.items</code> table reference
+     * Create an aliased <code>warehousedb.items</code> table reference
      */
     public Items(String alias) {
         this(alias, ITEMS);
@@ -112,7 +112,7 @@ public class Items extends TableImpl<ItemsRecord> {
      */
     @Override
     public Schema getSchema() {
-        return WhControllerDatabase.WH_CONTROLLER_DATABASE;
+        return Warehousedb.WAREHOUSEDB;
     }
 
     /**

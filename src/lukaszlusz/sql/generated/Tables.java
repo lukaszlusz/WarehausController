@@ -13,7 +13,7 @@ import lukaszlusz.sql.generated.tables.Statuses;
 
 
 /**
- * Convenience access to all tables in test
+ * Convenience access to all tables in warehousedb
  */
 @Generated(
     value = {
@@ -26,22 +26,22 @@ import lukaszlusz.sql.generated.tables.Statuses;
 public class Tables {
 
     /**
-     * The table <code>test.boxes</code>.
+     * The table <code>warehousedb.boxes</code>.
      */
     public static final Boxes BOXES = lukaszlusz.sql.generated.tables.Boxes.BOXES;
 
     /**
-     * The table <code>test.categories</code>.
+     * The table <code>warehousedb.categories</code>.
      */
     public static final Categories CATEGORIES = lukaszlusz.sql.generated.tables.Categories.CATEGORIES;
 
     /**
-     * The table <code>test.items</code>.
+     * The table <code>warehousedb.items</code>.
      */
     public static final Items ITEMS = lukaszlusz.sql.generated.tables.Items.ITEMS;
 
     /**
-     * The table <code>test.statuses</code>.
+     * The table <code>warehousedb.statuses</code>.
      */
     public static final Statuses STATUSES = lukaszlusz.sql.generated.tables.Statuses.STATUSES;
 }

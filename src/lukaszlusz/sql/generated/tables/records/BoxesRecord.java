@@ -28,45 +28,45 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class BoxesRecord extends UpdatableRecordImpl<BoxesRecord> implements Record3<Integer, String, String> {
 
-    private static final long serialVersionUID = -1747802987;
+    private static final long serialVersionUID = -581362539;
 
     /**
-     * Setter for <code>test.boxes.ID</code>.
+     * Setter for <code>warehousedb.boxes.ID</code>.
      */
     public void setId(Integer value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>test.boxes.ID</code>.
+     * Getter for <code>warehousedb.boxes.ID</code>.
      */
     public Integer getId() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>test.boxes.BarCode</code>.
+     * Setter for <code>warehousedb.boxes.BarCode</code>.
      */
     public void setBarcode(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>test.boxes.BarCode</code>.
+     * Getter for <code>warehousedb.boxes.BarCode</code>.
      */
     public String getBarcode() {
         return (String) get(1);
     }
 
     /**
-     * Setter for <code>test.boxes.Description</code>.
+     * Setter for <code>warehousedb.boxes.Description</code>.
      */
     public void setDescription(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>test.boxes.Description</code>.
+     * Getter for <code>warehousedb.boxes.Description</code>.
      */
     public String getDescription() {
         return (String) get(2);

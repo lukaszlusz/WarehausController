@@ -27,17 +27,17 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class StatusesRecord extends UpdatableRecordImpl<StatusesRecord> implements Record1<String> {
 
-    private static final long serialVersionUID = 844856739;
+    private static final long serialVersionUID = -489768679;
 
     /**
-     * Setter for <code>test.statuses.Status</code>.
+     * Setter for <code>warehousedb.statuses.Status</code>.
      */
     public void setStatus(String value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>test.statuses.Status</code>.
+     * Getter for <code>warehousedb.statuses.Status</code>.
      */
     public String getStatus() {
         return (String) get(0);

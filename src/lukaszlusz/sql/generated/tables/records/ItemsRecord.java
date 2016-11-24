@@ -28,101 +28,101 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ItemsRecord extends UpdatableRecordImpl<ItemsRecord> implements Record7<Integer, Integer, String, String, String, String, Integer> {
 
-    private static final long serialVersionUID = -543601985;
+    private static final long serialVersionUID = -1567398395;
 
     /**
-     * Setter for <code>test.items.ID</code>.
+     * Setter for <code>warehousedb.items.ID</code>.
      */
     public void setId(Integer value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>test.items.ID</code>.
+     * Getter for <code>warehousedb.items.ID</code>.
      */
     public Integer getId() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>test.items.Amount</code>.
+     * Setter for <code>warehousedb.items.Amount</code>.
      */
     public void setAmount(Integer value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>test.items.Amount</code>.
+     * Getter for <code>warehousedb.items.Amount</code>.
      */
     public Integer getAmount() {
         return (Integer) get(1);
     }
 
     /**
-     * Setter for <code>test.items.ItemName</code>.
+     * Setter for <code>warehousedb.items.ItemName</code>.
      */
     public void setItemname(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>test.items.ItemName</code>.
+     * Getter for <code>warehousedb.items.ItemName</code>.
      */
     public String getItemname() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>test.items.Category</code>.
+     * Setter for <code>warehousedb.items.Category</code>.
      */
     public void setCategory(String value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>test.items.Category</code>.
+     * Getter for <code>warehousedb.items.Category</code>.
      */
     public String getCategory() {
         return (String) get(3);
     }
 
     /**
-     * Setter for <code>test.items.Status</code>.
+     * Setter for <code>warehousedb.items.Status</code>.
      */
     public void setStatus(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>test.items.Status</code>.
+     * Getter for <code>warehousedb.items.Status</code>.
      */
     public String getStatus() {
         return (String) get(4);
     }
 
     /**
-     * Setter for <code>test.items.Description</code>.
+     * Setter for <code>warehousedb.items.Description</code>.
      */
     public void setDescription(String value) {
         set(5, value);
     }
 
     /**
-     * Getter for <code>test.items.Description</code>.
+     * Getter for <code>warehousedb.items.Description</code>.
      */
     public String getDescription() {
         return (String) get(5);
     }
 
     /**
-     * Setter for <code>test.items.Box</code>.
+     * Setter for <code>warehousedb.items.Box</code>.
      */
     public void setBox(Integer value) {
         set(6, value);
     }
 
     /**
-     * Getter for <code>test.items.Box</code>.
+     * Getter for <code>warehousedb.items.Box</code>.
      */
     public Integer getBox() {
         return (Integer) get(6);

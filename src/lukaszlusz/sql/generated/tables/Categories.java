@@ -10,7 +10,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import lukaszlusz.sql.generated.Keys;
-import lukaszlusz.sql.generated.WhControllerDatabase;
+import lukaszlusz.sql.generated.Warehousedb;
 import lukaszlusz.sql.generated.tables.records.CategoriesRecord;
 
 import org.jooq.Field;
@@ -34,10 +34,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Categories extends TableImpl<CategoriesRecord> {
 
-    private static final long serialVersionUID = -228483239;
+    private static final long serialVersionUID = 597638186;
 
     /**
-     * The reference instance of <code>test.categories</code>
+     * The reference instance of <code>warehousedb.categories</code>
      */
     public static final Categories CATEGORIES = new Categories();
 
@@ -50,19 +50,19 @@ public class Categories extends TableImpl<CategoriesRecord> {
     }
 
     /**
-     * The column <code>test.categories.Category</code>.
+     * The column <code>warehousedb.categories.Category</code>.
      */
     public final TableField<CategoriesRecord, String> CATEGORY = createField("Category", org.jooq.impl.SQLDataType.VARCHAR.length(30).nullable(false), this, "");
 
     /**
-     * Create a <code>test.categories</code> table reference
+     * Create a <code>warehousedb.categories</code> table reference
      */
     public Categories() {
         this("categories", null);
     }
 
     /**
-     * Create an aliased <code>test.categories</code> table reference
+     * Create an aliased <code>warehousedb.categories</code> table reference
      */
     public Categories(String alias) {
         this(alias, CATEGORIES);
@@ -81,7 +81,7 @@ public class Categories extends TableImpl<CategoriesRecord> {
      */
     @Override
     public Schema getSchema() {
-        return WhControllerDatabase.WH_CONTROLLER_DATABASE;
+        return Warehousedb.WAREHOUSEDB;
     }
 
     /**
