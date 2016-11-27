@@ -18,6 +18,15 @@ public class DbInfo {
         this.password = password;
     }
 
+    public boolean isCorrect() {
+        return isNumeric(port);
+    }
+
+    boolean isNumeric(String string)
+    {
+        return string.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

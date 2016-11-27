@@ -20,4 +20,12 @@ public class DbInfoTest {
         assertFalse(dbInfo1.equals(dbInfo2));
     }
 
+    @Test
+    public void isNumeric() throws Exception {
+        DbInfo dbInfo = new DbInfo();
+        String string = "0125";
+        assertTrue(dbInfo.isNumeric(string));
+        string = "054s54";
+        assertFalse(dbInfo.isNumeric(string));
+    }
 }
