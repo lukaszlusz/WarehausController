@@ -27,5 +27,9 @@ public class DbInfoTest {
         assertTrue(dbInfo.isNumeric(string));
         string = "054s54";
         assertFalse(dbInfo.isNumeric(string));
+        string = "05-04";
+        assertFalse(dbInfo.isNumeric(string));
+        string = "5565.64.";
+        assertFalse(dbInfo.isNumeric(string));
     }
 }

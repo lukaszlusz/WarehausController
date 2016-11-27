@@ -24,7 +24,7 @@ public class DbInfo {
 
     boolean isNumeric(String string)
     {
-        return string.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
+        return string.matches("\\d+?");  //match a number with optional '-' and decimal.
     }
 
     @Override
