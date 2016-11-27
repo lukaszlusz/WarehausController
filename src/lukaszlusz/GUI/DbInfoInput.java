@@ -40,10 +40,7 @@ public class DbInfoInput {
                 if (dbInfo.isCorrect()) {
                     ConfigWriter.WRITE_DB_INFO(dbInfo);
                     frame.dispose();
-                } else {
-                    wrongDataLabel.setVisible(true);
-                }
-
+                } else wrongDataLabel.setVisible(true);
             }
         });
         cancelButton.addActionListener(new ActionListener() {
@@ -54,7 +51,7 @@ public class DbInfoInput {
         });
     }
 
-    public void prepareGUI() {
+    private void prepareGUI() {
         frame = new JFrame("Wprowadź dane dostępu do bazy danych");
         wrongDataLabel.setVisible(false);
         frame.setPreferredSize(new Dimension(700, 400));

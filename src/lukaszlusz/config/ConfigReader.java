@@ -4,6 +4,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
 
+import lukaszlusz.GUI.DbInfoInput;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
@@ -11,7 +12,6 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import lukaszlusz.GUI.ErrorBox;
@@ -22,34 +22,40 @@ public class ConfigReader {
     private DbInfo dbInfo = new DbInfo();
 
     public DbInfo getDbInfo() {
-        if (!dbInfoLoaded) tryToLoadDbInfo();//TODO: first check if file exist
+        if (!dbInfoLoaded) {
+            File xmlFile = new File(filepath);
+            if(!fileExist(xmlFile)) new DbInfoInput();
+        }
+            tryToLoadDbInfo();
         return dbInfo;
     }
 
     private void tryToLoadDbInfo() {
             try {
                 loadDbInfo();
-            } catch (IOException e) {
-                System.err.print("Brak pliku konfiguracyjnego");
-                //TODO: open input dialog and create configuration file
-
-            } catch (ParserConfigurationException | SAXException e) {
+            }  catch (ParserConfigurationException | SAXException | IOException e) {
                 e.printStackTrace();
-                new ErrorBox("Błąd podczas odczytu pliku konfiguracyjnego");
-                //TODO: open input dialog and create configuration file and try load one more time
-                System.exit(-1);
+                new DbInfoInput();
+                try {
+                    loadDbInfo();
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                    new ErrorBox("Błąd podczas odczytu pliku konfiguracyjnego");
+                    System.exit(-1);
+                }
+
             }
     }
 
     private void loadDbInfo() throws IOException, ParserConfigurationException, SAXException {
         File xmlFile = new File(filepath);
-        checkIfFileExist(xmlFile);
         Document document = getParsedDocument(xmlFile);
         readDbInfoFromDocument(document);
     }
 
-    private void checkIfFileExist(File xmlFile) throws FileNotFoundException {
-        if(!xmlFile.exists() || xmlFile.isDirectory()) throw new FileNotFoundException();
+    private boolean fileExist(File xmlFile) {
+        if(!xmlFile.exists() || xmlFile.isDirectory()) return false;
+        return true;
     }
 
     private Document getParsedDocument(File xmlFile) throws ParserConfigurationException, IOException, SAXException {
