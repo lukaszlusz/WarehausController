@@ -22,7 +22,7 @@ public class ConfigReader {
     private DbInfo dbInfo = new DbInfo();
 
     public DbInfo getDbInfo() {
-        if (dbInfoLoaded == false) tryToLoadDbInfo();
+        if (!dbInfoLoaded) tryToLoadDbInfo();//TODO: first check if file exist
         return dbInfo;
     }
 
@@ -49,7 +49,7 @@ public class ConfigReader {
     }
 
     private void checkIfFileExist(File xmlFile) throws FileNotFoundException {
-        if(xmlFile.exists() == false || xmlFile.isDirectory()) throw new FileNotFoundException();
+        if(!xmlFile.exists() || xmlFile.isDirectory()) throw new FileNotFoundException();
     }
 
     private Document getParsedDocument(File xmlFile) throws ParserConfigurationException, IOException, SAXException {

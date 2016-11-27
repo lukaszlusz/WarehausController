@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class ConfigWriter {
-    static String filepath = "dbconfig.xml";
+    static String FILEPATH = "dbconfig.xml";
 
     public static void WRITE_DB_INFO(DbInfo dbInfo) {
         String content = "<?xml version=\"1.0\"?>\n" +
@@ -22,7 +22,7 @@ public class ConfigWriter {
 
         PrintWriter writer = null;
         try{
-            writer = new PrintWriter(filepath, "UTF-8");
+            writer = new PrintWriter(FILEPATH, "UTF-8");
             writer.write(content);
         } catch (IOException e) {
             new ErrorBox("Błąd podczas zapisywania pliku z konfiguracją");

@@ -8,7 +8,7 @@ public class ConfigReaderTest {
     @Test
     public void correctXML() throws Exception {
         ConfigReader configReader = new ConfigReader();
-        configReader.filepath = "./TestResourses/correct.xml";
+        configReader.filepath = "./TestResources/correct.xml";
         DbInfo dbInfo = new DbInfo("127.0.0.1", "test", "3306", "username", "password");
         assertTrue(dbInfo.equals(configReader.getDbInfo()));
     }
