@@ -1,7 +1,5 @@
 package lukaszlusz.sql;
 
-
-import lukaszlusz.config.DbInfo;
 import org.jooq.*;
 import org.jooq.impl.DSL;
 
@@ -13,16 +11,6 @@ import static org.jooq.impl.DSL.field;
 import static org.jooq.impl.DSL.table;
 
 public class TableCreator {
-    public static void main(String[] args) {
-        DBConnector dbConnector = new DBConnectorMySQL(new DbInfo("localhost", "warehousedb", "3306", "test2", ""));
-        try {
-            CREATE_TABLES(dbConnector.getConnection());
-            System.out.print(ARE_TABLES_CREATED(dbConnector.getConnection(), "warehousedb"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     private static String[] tablesNames = {"boxes", "categories", "items", "statuses"};
 
     public static  boolean ARE_TABLES_CREATED(Connection connection, String DbName)
