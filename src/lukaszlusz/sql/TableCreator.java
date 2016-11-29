@@ -1,31 +1,35 @@
 package lukaszlusz.sql;
 
-import org.jooq.*;
-import org.jooq.impl.DSL;
+import lukaszlusz.GUI.ErrorBox;
+import lukaszlusz.config.ConfigReader;
+import lukaszlusz.config.DbInfo;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static org.jooq.impl.DSL.field;
-import static org.jooq.impl.DSL.table;
 
 public class TableCreator {
     private static String[] tablesNames = {"boxes", "categories", "items", "statuses"};
 
-    public static  boolean ARE_TABLES_CREATED(Connection connection, String DbName)
-    {
-        Field TABLE_NAME = field("TABLE_NAME");
-        Table information_schema = table("information_schema.tables");
-        Field table_schema = field("table_schema");
+    public static void main(String[] args) {
+        DBConnector dbConnector = new DBConnectorMySQL(new DbInfo("localhost", "warehousedb", "3306", "test2", ""));
+        try {
+            CREATE_TABLES(dbConnector.getConnection());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-        DSLContext create = DSL.using(connection, SQLDialect.MYSQL);
-        Result<Record> result = create.select(TABLE_NAME).from(information_schema).where(table_schema.equal(DbName)).fetch();
+    public static  boolean ARE_TABLES_CREATED(Connection connection, String dbName) throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet result = statement.executeQuery("SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema='" + dbName +"';");
         Integer counter = 0;
-        for (Record r : result)
+        while (result.next())
         {
             for (String s : tablesNames) {
-                if (s.equals(r.getValue(TABLE_NAME))) ++counter;
+                if (s.equals(result.getString("TABLE_NAME"))) ++counter;
             }
         }
 
@@ -38,29 +42,36 @@ public class TableCreator {
             Statement statement = connection.createStatement();
 
             statement.execute("CREATE TABLE Boxes(" +
-                    "ID int NOT NULL AUTO_INCREMENT," +
-                    "BarCode VARCHAR(30)," +
-                    "Description VARCHAR(255)," +
+                    " ID int NOT NULL AUTO_INCREMENT," +
+                    " Localization VARCHAR(30)," +
+                    " Description VARCHAR(255)," +
                     " PRIMARY KEY (ID));");
 
             statement.execute("CREATE TABLE Categories(" +
-                    "Category VARCHAR(30)," +
-                    " PRIMARY KEY (Category));");
+                    " ID int NOT NULL AUTO_INCREMENT," +
+                    " Category VARCHAR(30)," +
+                    " PRIMARY KEY (ID));");
 
             statement.execute("CREATE TABLE Items(" +
-                    "ID int NOT NULL AUTO_INCREMENT," +
+                    " ID int NOT NULL AUTO_INCREMENT," +
                     " Amount int NOT NULL," +
                     " ItemName VARCHAR (30) NOT NULL," +
-                    " Category VARCHAR(30)," +
-                    " Status VARCHAR(30), " +
-                    "Description VARCHAR(255)," +
-                    " Box int, PRIMARY KEY (ID));");
+                    " CategoryID int," +
+                    " StatusID int," +
+                    " Description VARCHAR(255)," +
+                    " BoxID int," +
+                    " PRIMARY KEY (ID));");
 
-            statement.execute("CREATE TABLE Statuses(Status VARCHAR(30)," +
-                    " PRIMARY KEY (Status));");
+            statement.execute("CREATE TABLE Statuses(" +
+                    " ID int NOT NULL AUTO_INCREMENT," +
+                    " Status VARCHAR(30)," +
+                    " PRIMARY KEY (ID));");
 
         } catch (SQLException e) {
             e.printStackTrace();
+            new ErrorBox("Błąd podczas tworzenia tabel bazy danych.\n" +
+                    "Baza nie może zawierać tabel o nazwach: Boxes, Categories, Items, Statuses,\n " +
+                    "ponieważ takie tabele są używane przez ten program. Zaleca się utworzenie oddzielnej bazy na potrzeby tego programu.");
         }
     }
 }
