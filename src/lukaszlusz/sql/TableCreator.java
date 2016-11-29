@@ -1,7 +1,6 @@
 package lukaszlusz.sql;
 
 import lukaszlusz.GUI.ErrorBox;
-import lukaszlusz.config.ConfigReader;
 import lukaszlusz.config.DbInfo;
 
 import java.sql.Connection;
@@ -12,15 +11,6 @@ import java.sql.Statement;
 
 public class TableCreator {
     private static String[] tablesNames = {"boxes", "categories", "items", "statuses"};
-
-    public static void main(String[] args) {
-        DBConnector dbConnector = new DBConnectorMySQL(new DbInfo("localhost", "warehousedb", "3306", "test2", ""));
-        try {
-            CREATE_TABLES(dbConnector.getConnection());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     public static  boolean ARE_TABLES_CREATED(Connection connection, String dbName) throws SQLException {
         Statement statement = connection.createStatement();
