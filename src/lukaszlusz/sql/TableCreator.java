@@ -1,7 +1,6 @@
 package lukaszlusz.sql;
 
 import lukaszlusz.GUI.ErrorBox;
-import lukaszlusz.config.DbInfo;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -49,7 +48,7 @@ public class TableCreator {
                     " CategoryID int," +
                     " StatusID int," +
                     " Description VARCHAR(255)," +
-                    " BoxID int," +
+                    " BoxID int NOT NULL," +
                     " PRIMARY KEY (ID));");
 
             statement.execute("CREATE TABLE Statuses(" +
