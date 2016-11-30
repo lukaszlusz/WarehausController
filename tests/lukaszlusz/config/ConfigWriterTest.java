@@ -13,7 +13,7 @@ public class ConfigWriterTest {
         String filepath = "./TestResources/writerTest.xml";
         ConfigWriter.FILEPATH = filepath;
         ConfigWriter.WRITE_DB_INFO(dbInfo);
-        ConfigReader configReader = new ConfigReader();
+        ConfigReader configReader = ConfigReader.getInstance();
         configReader.filepath = filepath;
         DbInfo dbInfo2 = configReader.getDbInfo();
         assertTrue(dbInfo.equals(dbInfo2));
