@@ -6,9 +6,9 @@ import lukaszlusz.config.DbInfo;
 import java.sql.*;
 
 public abstract class DBConnector {
-    protected final String jdbcDriver;
-    protected DbInfo dbInfo;
-    protected Connection connection;
+    private final String jdbcDriver;
+    DbInfo dbInfo;
+    private Connection connection;
 
     public DBConnector(DbInfo dbInfo, String jdbcDriver) {
         this.dbInfo = dbInfo;
@@ -17,12 +17,8 @@ public abstract class DBConnector {
 
     protected abstract String createURL();
 
-    protected void connect() throws SQLException{
-       tryToConnect();
-    }
-    
     public Connection getConnection() throws SQLException {
-        if (connection == null) connect();
+        if (connection == null) tryToConnect();
         return connection;
     }
     
@@ -30,12 +26,15 @@ public abstract class DBConnector {
         if (connection != null) tryToCloseConnection();
     }
 
-    private void tryToConnect() throws SQLException {
+    private void tryToConnect() {
         try {
             Class.forName(jdbcDriver);
             connection = DriverManager.getConnection(createURL(),dbInfo.user,dbInfo.password);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            new ErrorBox("Nie można połączyć się z bazą danych");
         }
 
     }
