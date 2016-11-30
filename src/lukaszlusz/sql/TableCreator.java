@@ -28,7 +28,7 @@ public class TableCreator {
                 if (s.equals(result.getString("TABLE_NAME"))) ++counter;
             }
         }
-
+        statement.close();
         if (counter == tablesNames.length) return true;
         else return false;
     }
@@ -60,6 +60,7 @@ public class TableCreator {
             statement.execute("CREATE TABLE Statuses(" +
                     " Status VARCHAR(30) NOT NULL," +
                     " PRIMARY KEY (Status));");
+            statement.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
