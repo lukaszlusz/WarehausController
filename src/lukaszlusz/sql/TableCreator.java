@@ -37,24 +37,22 @@ public class TableCreator {
                     " PRIMARY KEY (ID));");
 
             statement.execute("CREATE TABLE Categories(" +
-                    " CategoryID int NOT NULL AUTO_INCREMENT," +
-                    " Category VARCHAR(30)," +
-                    " PRIMARY KEY (ID));");
+                    " Category VARCHAR(30) NOT NULL," +
+                    " PRIMARY KEY (Category));");
 
             statement.execute("CREATE TABLE Items(" +
                     " ItemID int NOT NULL AUTO_INCREMENT," +
                     " Amount int NOT NULL," +
                     " ItemName VARCHAR (30) NOT NULL," +
-                    " CategoryID int," +
-                    " StatusID int," +
+                    " Category VARCHAR(30)," +
+                    " Status VARCHAR(30)," +
                     " ItemDescription VARCHAR(255)," +
                     " BoxID int NOT NULL," +
                     " PRIMARY KEY (ID));");
 
             statement.execute("CREATE TABLE Statuses(" +
-                    " StatusID int NOT NULL AUTO_INCREMENT," +
-                    " Status VARCHAR(30)," +
-                    " PRIMARY KEY (ID));");
+                    " Status VARCHAR(30) NOT NULL," +
+                    " PRIMARY KEY (Status));");
 
         } catch (SQLException e) {
             e.printStackTrace();
