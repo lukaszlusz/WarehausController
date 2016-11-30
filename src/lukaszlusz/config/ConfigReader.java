@@ -17,8 +17,7 @@ import java.io.IOException;
 import lukaszlusz.GUI.ErrorBox;
 
 public class ConfigReader {
-    private static ConfigReader instance = null;
-
+    private static ConfigReader INSTANCE = null;
     String filepath = "dbconfig.xml";
     private boolean dbInfoLoaded = false;
     private DbInfo dbInfo = new DbInfo();
@@ -26,8 +25,8 @@ public class ConfigReader {
     private ConfigReader() {}
 
     public static ConfigReader getInstance() {
-        if (instance == null) instance = new ConfigReader();
-        return instance;
+        if (INSTANCE == null) INSTANCE = new ConfigReader();
+        return INSTANCE;
     }
 
     public DbInfo getDbInfo() {
