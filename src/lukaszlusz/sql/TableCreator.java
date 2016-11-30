@@ -31,18 +31,18 @@ public class TableCreator {
             Statement statement = connection.createStatement();
 
             statement.execute("CREATE TABLE Boxes(" +
-                    " ID int NOT NULL AUTO_INCREMENT," +
+                    " BoxID int NOT NULL AUTO_INCREMENT," +
                     " Localization VARCHAR(30)," +
                     " Description VARCHAR(255)," +
                     " PRIMARY KEY (ID));");
 
             statement.execute("CREATE TABLE Categories(" +
-                    " ID int NOT NULL AUTO_INCREMENT," +
+                    " CategoryID int NOT NULL AUTO_INCREMENT," +
                     " Category VARCHAR(30)," +
                     " PRIMARY KEY (ID));");
 
             statement.execute("CREATE TABLE Items(" +
-                    " ID int NOT NULL AUTO_INCREMENT," +
+                    " ItemID int NOT NULL AUTO_INCREMENT," +
                     " Amount int NOT NULL," +
                     " ItemName VARCHAR (30) NOT NULL," +
                     " CategoryID int," +
@@ -52,7 +52,7 @@ public class TableCreator {
                     " PRIMARY KEY (ID));");
 
             statement.execute("CREATE TABLE Statuses(" +
-                    " ID int NOT NULL AUTO_INCREMENT," +
+                    " StatusID int NOT NULL AUTO_INCREMENT," +
                     " Status VARCHAR(30)," +
                     " PRIMARY KEY (ID));");
 
