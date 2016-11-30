@@ -33,7 +33,7 @@ public class TableCreator {
             statement.execute("CREATE TABLE Boxes(" +
                     " BoxID int NOT NULL AUTO_INCREMENT," +
                     " Localization VARCHAR(30)," +
-                    " Description VARCHAR(255)," +
+                    " BoxDescription VARCHAR(255)," +
                     " PRIMARY KEY (ID));");
 
             statement.execute("CREATE TABLE Categories(" +
@@ -47,7 +47,7 @@ public class TableCreator {
                     " ItemName VARCHAR (30) NOT NULL," +
                     " CategoryID int," +
                     " StatusID int," +
-                    " Description VARCHAR(255)," +
+                    " ItemDescription VARCHAR(255)," +
                     " BoxID int NOT NULL," +
                     " PRIMARY KEY (ID));");
 
