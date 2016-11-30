@@ -1,6 +1,7 @@
 package lukaszlusz.sql;
 
 import lukaszlusz.GUI.ErrorBox;
+import lukaszlusz.config.DbInfo;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,6 +11,12 @@ import java.sql.Statement;
 
 public class TableCreator {
     private static String[] tablesNames = {"boxes", "categories", "items", "statuses"};
+
+    public static void main(String[] args) {
+        DBConnector dbConnector = new DBConnectorMySQL(new DbInfo("localhost", "warehousedb", "3306", "lukasz", "1234"));
+        CREATE_TABLES(dbConnector.getConnection());
+
+    }
 
     public static  boolean ARE_TABLES_CREATED(Connection connection, String dbName) throws SQLException {
         Statement statement = connection.createStatement();
@@ -34,7 +41,7 @@ public class TableCreator {
                     " BoxID int NOT NULL AUTO_INCREMENT," +
                     " Localization VARCHAR(30)," +
                     " BoxDescription VARCHAR(255)," +
-                    " PRIMARY KEY (ID));");
+                    " PRIMARY KEY (BoxID));");
 
             statement.execute("CREATE TABLE Categories(" +
                     " Category VARCHAR(30) NOT NULL," +
@@ -48,7 +55,7 @@ public class TableCreator {
                     " Status VARCHAR(30)," +
                     " ItemDescription VARCHAR(255)," +
                     " BoxID int NOT NULL," +
-                    " PRIMARY KEY (ID));");
+                    " PRIMARY KEY (ItemID));");
 
             statement.execute("CREATE TABLE Statuses(" +
                     " Status VARCHAR(30) NOT NULL," +

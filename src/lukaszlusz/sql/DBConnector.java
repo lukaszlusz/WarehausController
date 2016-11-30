@@ -17,7 +17,7 @@ public abstract class DBConnector {
 
     protected abstract String createURL();
 
-    public Connection getConnection() throws SQLException {
+    public Connection getConnection() {
         if (connection == null) tryToConnect();
         return connection;
     }
