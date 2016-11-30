@@ -2,10 +2,8 @@ package lukaszlusz.GUI;
 
 import javax.swing.table.AbstractTableModel;
 import java.sql.*;
-import java.util.Map;
 
 public class QueryResultTableModel extends AbstractTableModel {
-    private Map<String, String> fieldNameToColumnNameMap = null;
     private String[] nonEditableColumns = null;
     private ResultSet resultSet = null;
 
@@ -16,22 +14,11 @@ public class QueryResultTableModel extends AbstractTableModel {
         this.resultSet = resultSet;
     }
 
-    /** Constructs model where columns headers will be taken from given map.
+    /** Constructs model where database fields names given in String[] won't be editable.
      * By defalaut field are editable.
      * @param resultSet result of SQL query from JDBC package, must be SCROLL_INTENSIVE  and CONCUR_UPDATABLE
-     * @param fieldNameToColumnNameMap Map with name of field from database as key and name which will be shown as column header**/
-    public QueryResultTableModel(ResultSet resultSet, Map<String, String> fieldNameToColumnNameMap) {
-        this.resultSet = resultSet;
-        this.fieldNameToColumnNameMap = fieldNameToColumnNameMap;
-    }
-
-    /** Constructs model where columns headers will be taken from given map and database fields names given in String[] won't be editable.
-     * By defalaut field are editable.
-     * @param resultSet result of SQL query from JDBC package, must be SCROLL_INTENSIVE  and CONCUR_UPDATABLE
-     * @param fieldNameToColumnNameMap Map with name of field from database as key and name which will be shown as column header
      * @param nonEditableColumns database fields names which wont't be editable**/
-    public QueryResultTableModel(ResultSet resultSet, Map<String, String> fieldNameToColumnNameMap, String[] nonEditableColumns) {
-        this.fieldNameToColumnNameMap = fieldNameToColumnNameMap;
+    public QueryResultTableModel(ResultSet resultSet, String[] nonEditableColumns) {
         this.nonEditableColumns = nonEditableColumns;
         this.resultSet = resultSet;
     }
@@ -46,10 +33,6 @@ public class QueryResultTableModel extends AbstractTableModel {
             columnName = resultSetMetaData.getColumnName(++column);
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-        if (fieldNameToColumnNameMap != null) {
-            translatedColumnName = fieldNameToColumnNameMap.get(columnName);
-            if (translatedColumnName != null) return translatedColumnName;
         }
         return columnName;
     }
