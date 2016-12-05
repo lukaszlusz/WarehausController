@@ -34,15 +34,15 @@ public class DbInfoInput {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dbInfo = new DbInfo();
-                dbInfo.address = addressTextField.getText();
-                dbInfo.dbName = dbNameTextField.getText();
-                dbInfo.port = portTextField.getText();
-                dbInfo.user = userTextField.getText();
-                dbInfo.password = new String(passwordField.getPassword());
-                if (dbInfo.isCorrect()) {
-                    ConfigWriter.WRITE_DB_INFO(dbInfo);
+                 DbInfo dbInfoLocal = new DbInfo();
+                dbInfoLocal.address = addressTextField.getText();
+                dbInfoLocal.dbName = dbNameTextField.getText();
+                dbInfoLocal.port = portTextField.getText();
+                dbInfoLocal.user = userTextField.getText();
+                dbInfoLocal.password = new String(passwordField.getPassword());
+                if (dbInfoLocal.isCorrect()) {
                     isDbInfoLoaded =true;
+                    dbInfo = dbInfoLocal;
                     frame.dispose();
                 } else wrongDataLabel.setVisible(true);
             }
@@ -56,7 +56,7 @@ public class DbInfoInput {
     }
 
     public boolean isDbInfoAvailable() {
-        if (dbInfo!= null && dbInfo.isCorrect() && isDbInfoLoaded) return true;
+        if (dbInfo!= null && isDbInfoLoaded && dbInfo.isCorrect()) return true;
         else return false;
     }
 
