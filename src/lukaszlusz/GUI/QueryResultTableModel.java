@@ -27,7 +27,6 @@ public class QueryResultTableModel extends AbstractTableModel {
     public String getColumnName(int column) {
         ResultSetMetaData resultSetMetaData;
         String columnName = "Błąd";
-        String translatedColumnName;
         try {
             resultSetMetaData = resultSet.getMetaData();
             columnName = resultSetMetaData.getColumnName(++column);
