@@ -25,13 +25,16 @@ public class DbInfoInput {
     private JButton cancelButton;
     private JLabel wrongDataLabel;
 
+    private DbInfo dbInfo;
+    private boolean isDbInfoLoaded = false;
+
     public DbInfoInput() {
         prepareGUI();
 
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DbInfo dbInfo = new DbInfo();
+                dbInfo = new DbInfo();
                 dbInfo.address = addressTextField.getText();
                 dbInfo.dbName = dbNameTextField.getText();
                 dbInfo.port = portTextField.getText();
@@ -39,6 +42,7 @@ public class DbInfoInput {
                 dbInfo.password = new String(passwordField.getPassword());
                 if (dbInfo.isCorrect()) {
                     ConfigWriter.WRITE_DB_INFO(dbInfo);
+                    isDbInfoLoaded =true;
                     frame.dispose();
                 } else wrongDataLabel.setVisible(true);
             }
@@ -49,6 +53,19 @@ public class DbInfoInput {
                 System.exit(-1);
             }
         });
+    }
+
+    public boolean isDbInfoAvailable() {
+        if (dbInfo!= null && dbInfo.isCorrect() && isDbInfoLoaded) return true;
+        else return false;
+    }
+
+    public void waitUntilDataAvailable() {
+        while (!isDbInfoAvailable());
+    }
+
+    public DbInfo getDbInfo() {
+        return dbInfo;
     }
 
     private void prepareGUI() {

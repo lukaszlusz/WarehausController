@@ -32,7 +32,11 @@ public class ConfigReader {
     public DbInfo getDbInfo() {
         if (!dbInfoLoaded) {
             File xmlFile = new File(filepath);
-            if(!fileExist(xmlFile)) new DbInfoInput();
+            if(!fileExist(xmlFile)) {
+                DbInfoInput dbInfoInput = new DbInfoInput();
+                dbInfoInput.waitUntilDataAvailable();
+                ConfigWriter.WRITE_DB_INFO(dbInfoInput.getDbInfo());
+            }
         }
             tryToLoadDbInfo();
         return dbInfo;
@@ -43,7 +47,9 @@ public class ConfigReader {
                 loadDbInfo();
             }  catch (ParserConfigurationException | SAXException | IOException e) {
                 e.printStackTrace();
-                new DbInfoInput();
+                DbInfoInput dbInfoInput = new DbInfoInput();
+                dbInfoInput.waitUntilDataAvailable();
+                ConfigWriter.WRITE_DB_INFO(dbInfoInput.getDbInfo());
                 try {
                     loadDbInfo();
                 } catch (Exception e1) {
