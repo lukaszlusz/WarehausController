@@ -9,14 +9,14 @@ public class QueryResultTableModel extends AbstractTableModel {
 
     /** Constructs model where columns headers will be taken from fields names from database.
      * By defalaut field are editable.
-     * @param resultSet result of SQL query from JDBC package, must be SCROLL_SENSITIVE and CONCUR_UPDATABLE **/
+     * @param resultSet result of SQL query from JDBC package, must be SCROLL_SENSITIVE and CONCUR_UPDATABLE and must be taken from only one table**/
     public QueryResultTableModel(ResultSet resultSet) {
         this.resultSet = resultSet;
     }
 
     /** Constructs model where database fields names given in String[] won't be editable.
      * By defalaut field are editable.
-     * @param resultSet result of SQL query from JDBC package, must be SCROLL_INTENSIVE  and CONCUR_UPDATABLE
+     * @param resultSet result of SQL query from JDBC package, must be SCROLL_INTENSIVE  and CONCUR_UPDATABLE and must be taken from only one table
      * @param nonEditableColumns database fields names which wont't be editable**/
     public QueryResultTableModel(ResultSet resultSet, String[] nonEditableColumns) {
         this.nonEditableColumns = nonEditableColumns;
@@ -25,14 +25,7 @@ public class QueryResultTableModel extends AbstractTableModel {
 
     @Override
     public String getColumnName(int column) {
-        ResultSetMetaData resultSetMetaData;
-        String columnName = "Błąd";
-        try {
-            resultSetMetaData = resultSet.getMetaData();
-            columnName = resultSetMetaData.getColumnName(++column);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String columnName = getColumnNameFromResultSet(column);
         return columnName;
     }
 
@@ -40,7 +33,7 @@ public class QueryResultTableModel extends AbstractTableModel {
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         if (nonEditableColumns != null) {
             ResultSetMetaData resultSetMetaData;
-            String columnName = "Błąd";
+            String columnName = null;
             try {
                 resultSetMetaData = resultSet.getMetaData();
                 columnName = resultSetMetaData.getColumnName(++columnIndex);
@@ -102,5 +95,17 @@ public class QueryResultTableModel extends AbstractTableModel {
             e.printStackTrace();
         }
         return value;
+    }
+
+    private String getColumnNameFromResultSet(int column) {
+        ResultSetMetaData resultSetMetaData;
+        String columnName = "Błąd";
+        try {
+            resultSetMetaData = resultSet.getMetaData();
+            columnName = resultSetMetaData.getColumnName(++column);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return columnName;
     }
 }
