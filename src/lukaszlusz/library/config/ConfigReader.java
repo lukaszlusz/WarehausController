@@ -1,10 +1,10 @@
-package lukaszlusz.config;
+package lukaszlusz.library.config;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.ParserConfigurationException;
 
-import lukaszlusz.GUI.DbInfoInput;
+import lukaszlusz.library.Exceptions.FileReadException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
@@ -12,9 +12,8 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-
-import lukaszlusz.GUI.ErrorBox;
 
 public class ConfigReader {
     private static ConfigReader INSTANCE = null;
@@ -29,35 +28,22 @@ public class ConfigReader {
         return INSTANCE;
     }
 
-    public DbInfo getDbInfo() {
+    public DbInfo getDbInfo() throws FileNotFoundException, FileReadException{
         if (!dbInfoLoaded) {
             File xmlFile = new File(filepath);
-            if(!fileExist(xmlFile)) {
-                DbInfoInput dbInfoInput = new DbInfoInput();
-                dbInfoInput.waitUntilDataAvailable();
-                ConfigWriter.WRITE_DB_INFO(dbInfoInput.getDbInfo());
-            }
+            if(!fileExist(xmlFile)) throw new FileNotFoundException();
         }
             tryToLoadDbInfo();
         return dbInfo;
     }
 
-    private void tryToLoadDbInfo() {
+    private void tryToLoadDbInfo() throws FileReadException {
             try {
                 loadDbInfo();
-            }  catch (ParserConfigurationException | SAXException | IOException e) {
+            }
+            catch (ParserConfigurationException | SAXException | IOException e) {
                 e.printStackTrace();
-                DbInfoInput dbInfoInput = new DbInfoInput();
-                dbInfoInput.waitUntilDataAvailable();
-                ConfigWriter.WRITE_DB_INFO(dbInfoInput.getDbInfo());
-                try {
-                    loadDbInfo();
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                    new ErrorBox("Błąd podczas odczytu pliku konfiguracyjnego");
-                    System.exit(-1);
-                }
-
+                throw new FileReadException("Błąd podczas odczytu pliku konfiguracyjnego");
             }
     }
 

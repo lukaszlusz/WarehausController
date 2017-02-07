@@ -1,7 +1,6 @@
-package lukaszlusz.sql;
+package lukaszlusz.library.sql;
 
-
-import lukaszlusz.config.DbInfo;
+import lukaszlusz.library.config.DbInfo;
 
 public class DBConnectorMySQL extends DBConnector {
 

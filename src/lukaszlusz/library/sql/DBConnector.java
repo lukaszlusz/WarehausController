@@ -1,32 +1,32 @@
-package lukaszlusz.sql;
+package lukaszlusz.library.sql;
 
-import lukaszlusz.GUI.ErrorBox;
-import lukaszlusz.config.DbInfo;
+import lukaszlusz.library.Exceptions.DatabaseConnectionException;
+import lukaszlusz.library.config.DbInfo;
 
 import java.sql.*;
 
-public abstract class DBConnector {
+abstract class DBConnector {
     private final String jdbcDriver;
     DbInfo dbInfo;
     private Connection connection;
 
-    public DBConnector(DbInfo dbInfo, String jdbcDriver) {
+    DBConnector(DbInfo dbInfo, String jdbcDriver) {
         this.dbInfo = dbInfo;
         this.jdbcDriver = jdbcDriver;
     }
 
-    protected abstract String createURL();
-
-    public Connection getConnection() {
-        if (connection == null) tryToConnect();
+    Connection getConnection() throws DatabaseConnectionException {
+        if (connection == null) connect();
         return connection;
     }
     
-    public void closeConnection() {
+    void closeConnection() throws DatabaseConnectionException {
         if (connection != null) tryToCloseConnection();
     }
 
-    private void tryToConnect() {
+    protected abstract String createURL();
+
+    private void connect() throws DatabaseConnectionException {
         try {
             Class.forName(jdbcDriver);
             connection = DriverManager.getConnection(createURL(),dbInfo.user,dbInfo.password);
@@ -34,17 +34,17 @@ public abstract class DBConnector {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
-            new ErrorBox("Nie można połączyć się z bazą danych");
+            throw new DatabaseConnectionException("Nie można połączyć z bazą danych");
         }
 
     }
 
-    private void tryToCloseConnection() {
+    private void tryToCloseConnection() throws DatabaseConnectionException {
         try {
             connection.close();
         }catch (SQLException e) {
             e.printStackTrace();
-            new ErrorBox("Nie udało się poprawnie zakończyć połaczenia");
+            throw new DatabaseConnectionException("Nie udało się poprawnie zakończyć połaczenia");
         }
     }
 

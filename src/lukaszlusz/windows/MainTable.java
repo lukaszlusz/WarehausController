@@ -1,6 +1,6 @@
-package lukaszlusz.GUI;
+package lukaszlusz.windows;
 
-import lukaszlusz.sql.Database;
+import lukaszlusz.library.sql.Database;
 
 import javax.swing.*;
 import java.sql.ResultSet;

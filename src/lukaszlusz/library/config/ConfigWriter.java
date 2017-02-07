@@ -1,6 +1,6 @@
-package lukaszlusz.config;
+package lukaszlusz.library.config;
 
-import lukaszlusz.GUI.ErrorBox;
+import lukaszlusz.library.Exceptions.FileWriteException;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 public class ConfigWriter {
     static String FILEPATH = "dbconfig.xml";
 
-    public static void WRITE_DB_INFO(DbInfo dbInfo) {
+    public static void WRITE_DB_INFO(DbInfo dbInfo) throws FileWriteException {
         String content = "<?xml version=\"1.0\"?>\n" +
                 "<database>\n" +
                 "\t<dbinfo id=\"1\">\n" +
@@ -25,8 +25,8 @@ public class ConfigWriter {
             writer = new PrintWriter(FILEPATH, "UTF-8");
             writer.write(content);
         } catch (IOException e) {
-            new ErrorBox("Błąd podczas zapisywania pliku z konfiguracją");
             e.printStackTrace();
+            throw new FileWriteException("Błąd podczas zapisywania pliku z konfiguracją");
         } finally {
             writer.close();
         }

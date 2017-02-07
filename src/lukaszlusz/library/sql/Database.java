@@ -1,6 +1,6 @@
-package lukaszlusz.sql;
+package lukaszlusz.library.sql;
 
-import lukaszlusz.config.ConfigReader;
+import lukaszlusz.library.config.ConfigReader;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,8 +16,7 @@ public class Database {
         return ourInstance;
     }
 
-    private Database() {
-    }
+    private Database() {}
 
     private ResultSet executeQuery(String sqlQuery) throws SQLException {
         ResultSet resultSet;

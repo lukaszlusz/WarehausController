@@ -1,9 +1,7 @@
 package lukaszlusz.sql;
 
-import lukaszlusz.config.DbInfo;
+import lukaszlusz.library.config.DbInfo;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class DBConnectorMySQLTest {
     @Test

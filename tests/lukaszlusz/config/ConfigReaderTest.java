@@ -1,5 +1,6 @@
 package lukaszlusz.config;
 
+import lukaszlusz.library.config.DbInfo;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

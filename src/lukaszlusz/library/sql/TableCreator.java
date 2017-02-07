@@ -1,7 +1,6 @@
-package lukaszlusz.sql;
+package lukaszlusz.library.sql;
 
-import lukaszlusz.GUI.ErrorBox;
-import lukaszlusz.config.DbInfo;
+import lukaszlusz.library.Exceptions.DatabaseOperationException;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,12 +10,6 @@ import java.sql.Statement;
 
 public class TableCreator {
     private static String[] tablesNames = {"boxes", "categories", "items", "statuses"};
-
-    public static void main(String[] args) {
-        DBConnector dbConnector = new DBConnectorMySQL(new DbInfo("localhost", "warehousedb", "3306", "lukasz", "1234"));
-        CREATE_TABLES(dbConnector.getConnection());
-
-    }
 
     public static  boolean ARE_TABLES_CREATED(Connection connection, String dbName) throws SQLException {
         Statement statement = connection.createStatement();
@@ -33,7 +26,7 @@ public class TableCreator {
         else return false;
     }
 
-    public static void CREATE_TABLES(Connection connection) {
+    public static void CREATE_TABLES(Connection connection) throws DatabaseOperationException {
         try {
             Statement statement = connection.createStatement();
 
@@ -64,7 +57,7 @@ public class TableCreator {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            new ErrorBox("Błąd podczas tworzenia tabel bazy danych.\n" +
+            throw new DatabaseOperationException("Błąd podczas tworzenia tabel bazy danych.\n" +
                     "Baza nie może zawierać tabel o nazwach: Boxes, Categories, Items, Statuses,\n " +
                     "ponieważ takie tabele są używane przez ten program. Zaleca się utworzenie oddzielnej bazy na potrzeby tego programu.");
         }

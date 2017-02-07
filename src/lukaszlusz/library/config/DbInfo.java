@@ -1,4 +1,4 @@
-package lukaszlusz.config;
+package lukaszlusz.library.config;
 
 public class DbInfo {
     public String address;

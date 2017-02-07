@@ -1,7 +1,6 @@
-package lukaszlusz.GUI;
+package lukaszlusz.windows;
 
-import lukaszlusz.config.ConfigWriter;
-import lukaszlusz.config.DbInfo;
+import lukaszlusz.library.config.DbInfo;
 
 import javax.swing.*;
 import java.awt.*;

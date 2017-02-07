@@ -1,4 +1,4 @@
-package lukaszlusz.GUI;
+package lukaszlusz.windows;
 
 import javax.swing.table.AbstractTableModel;
 import java.sql.*;
