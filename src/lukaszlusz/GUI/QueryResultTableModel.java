@@ -102,7 +102,7 @@ public class QueryResultTableModel extends AbstractTableModel {
         String columnName = "Błąd";
         try {
             resultSetMetaData = resultSet.getMetaData();
-            columnName = resultSetMetaData.getColumnName(++column);
+            columnName = resultSetMetaData.getColumnLabel(++column);
         } catch (SQLException e) {
             e.printStackTrace();
         }

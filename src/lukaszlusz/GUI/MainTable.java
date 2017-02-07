@@ -1,17 +1,12 @@
 package lukaszlusz.GUI;
 
-import lukaszlusz.config.DbInfo;
-import lukaszlusz.sql.DBConnector;
-import lukaszlusz.sql.DBConnectorMySQL;
 import lukaszlusz.sql.Database;
 
 import javax.swing.*;
-import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public class MainTable extends JTable {
+public class MainTable extends JTable{
     public MainTable(ResultSet resultSet) {
         prepareGUI(resultSet);
     }
@@ -23,7 +18,7 @@ public class MainTable extends JTable {
             JComboBox statusesComboBox = prepareComboBox(Database.getInstance().getStatuses());
             JComboBox categoriesComboBox = prepareComboBox(Database.getInstance().getCategories());
             getColumn("Status").setCellEditor(new DefaultCellEditor(statusesComboBox));
-            getColumn("Category").setCellEditor(new DefaultCellEditor(categoriesComboBox));
+            getColumn("Kategoria").setCellEditor(new DefaultCellEditor(categoriesComboBox));
         } catch (SQLException e) {
             e.printStackTrace();
             new ErrorBox("Błąd połączenia z bazą dancyh");

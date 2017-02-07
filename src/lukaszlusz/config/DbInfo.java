@@ -25,7 +25,7 @@ public class DbInfo {
     boolean isNumeric(String string)
     {
         return string.matches("\\d+?");
-    }
+    }//TODO: nie mogą być puste
 
     @Override
     public boolean equals(Object o) {
