@@ -31,7 +31,7 @@ public class ConfigReader {
     public DbInfo getDbInfo() throws FileNotFoundException, FileReadException{
         if (!dbInfoLoaded) {
             File xmlFile = new File(filepath);
-            if(!fileExist(xmlFile)) throw new FileNotFoundException();
+            if(!fileExist(xmlFile)) throw new FileNotFoundException("Nie znaleziono pliku konfiguracyjnego");
         }
             tryToLoadDbInfo();
         return dbInfo;
