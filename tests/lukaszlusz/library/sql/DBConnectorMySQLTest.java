@@ -1,7 +1,9 @@
-package lukaszlusz.sql;
+package lukaszlusz.library.sql;
 
 import lukaszlusz.library.config.DbInfo;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class DBConnectorMySQLTest {
     @Test

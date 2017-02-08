@@ -7,22 +7,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MainTable extends JTable{
-    public MainTable(ResultSet resultSet) {
-        prepareGUI(resultSet);
+    public MainTable(ResultSet mainResultSet, ResultSet statusesResultSet, ResultSet categoriesResultSet) {
+        prepareGUI(mainResultSet, statusesResultSet, categoriesResultSet);
     }
 
-    private void prepareGUI(ResultSet resultSet) {
+    private void prepareGUI(ResultSet mainResultSet, ResultSet statusesResultSet, ResultSet categoriesResultSet) {
         String[] nonEditableColumns = {"ItemID"};
-        setModel(new QueryResultTableModel(resultSet, nonEditableColumns));
-        try {
-            JComboBox statusesComboBox = prepareComboBox(Database.getInstance().getStatuses());
-            JComboBox categoriesComboBox = prepareComboBox(Database.getInstance().getCategories());
+        setModel(new QueryResultTableModel(mainResultSet, nonEditableColumns));
+            JComboBox statusesComboBox = prepareComboBox(statusesResultSet);
+            JComboBox categoriesComboBox = prepareComboBox(categoriesResultSet);
             getColumn("Status").setCellEditor(new DefaultCellEditor(statusesComboBox));
             getColumn("Kategoria").setCellEditor(new DefaultCellEditor(categoriesComboBox));
-        } catch (SQLException e) {
-            e.printStackTrace();
-            new ErrorBox("Błąd połączenia z bazą dancyh");
-        }
     }
 
     private JComboBox prepareComboBox(ResultSet resultSet) {

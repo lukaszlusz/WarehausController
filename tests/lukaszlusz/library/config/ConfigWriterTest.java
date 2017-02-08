@@ -1,4 +1,4 @@
-package lukaszlusz.config;
+package lukaszlusz.library.config;
 
 import lukaszlusz.library.config.DbInfo;
 import org.junit.Test;

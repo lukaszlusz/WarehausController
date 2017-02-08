@@ -22,7 +22,7 @@ public class DbInfo {
         return isNumeric(port);
     }
 
-    boolean isNumeric(String string)
+    public boolean isNumeric(String string)
     {
         return string.matches("\\d+?");
     }//TODO: nie mogą być puste

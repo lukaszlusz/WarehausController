@@ -1,6 +1,7 @@
 package lukaszlusz.library.sql;
 
-import lukaszlusz.library.config.ConfigReader;
+import lukaszlusz.library.Exceptions.DatabaseConnectionException;
+import lukaszlusz.library.config.DbInfo;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -8,36 +9,32 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Database {
-    private static Database ourInstance = new Database();
+    DBConnector dbConnector;
 
-    DBConnector dbConnector = new DBConnectorMySQL(ConfigReader.getInstance().getDbInfo());
-
-    public static Database getInstance() {
-        return ourInstance;
+    public Database(DbInfo dbInfo) {
+        dbConnector = new DBConnectorMySQL(dbInfo);
     }
 
-    private Database() {}
+    public ResultSet getStatuses() throws SQLException, DatabaseConnectionException {
+        return executeQuery("SELECT Status FROM Statuses");
+    }
 
-    private ResultSet executeQuery(String sqlQuery) throws SQLException {
+    public ResultSet getCategories() throws SQLException, DatabaseConnectionException {
+        return executeQuery("SELECT Category FROM Categories");
+    }
+
+    public Connection getConnection() throws DatabaseConnectionException {
+        return dbConnector.getConnection();
+    }
+
+    public void closeConnection() throws DatabaseConnectionException {
+        dbConnector.closeConnection();
+    }
+
+    private ResultSet executeQuery(String sqlQuery) throws SQLException, DatabaseConnectionException {
         ResultSet resultSet;
         Statement statement = getConnection().createStatement();
         resultSet = statement.executeQuery(sqlQuery);
         return resultSet;
-    }
-
-    public ResultSet getStatuses() throws SQLException{
-        return executeQuery("SELECT Status FROM Statuses");
-    }
-
-    public ResultSet getCategories() throws SQLException {
-        return executeQuery("SELECT Category FROM Categories");
-    }
-
-    public Connection getConnection() {
-        return dbConnector.getConnection();
-    }
-
-    public void closeConnection() {
-        dbConnector.closeConnection();
     }
 }
