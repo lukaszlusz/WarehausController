@@ -16,16 +16,14 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
 public class main {
-
     public static void main(String[] args) {
         DbInfo dbInfo = loadDbInfo();
         Database database = new Database(dbInfo);
         checkTables(database, dbInfo.dbName);
         MainTable mainTable = createMainTable(database);
 
-        mainTable.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
-        JScrollPane jScrollPane = new JScrollPane(mainTable);
         JFrame frame = new JFrame();
+        JScrollPane jScrollPane = new JScrollPane(mainTable);
         frame.add(jScrollPane);
         frame.setPreferredSize(new Dimension(1920, 1080));
         frame.pack();

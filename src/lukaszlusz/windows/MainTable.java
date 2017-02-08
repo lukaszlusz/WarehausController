@@ -14,10 +14,11 @@ public class MainTable extends JTable{
     private void prepareGUI(ResultSet mainResultSet, ResultSet statusesResultSet, ResultSet categoriesResultSet) {
         String[] nonEditableColumns = {"ItemID"};
         setModel(new QueryResultTableModel(mainResultSet, nonEditableColumns));
-            JComboBox statusesComboBox = prepareComboBox(statusesResultSet);
-            JComboBox categoriesComboBox = prepareComboBox(categoriesResultSet);
-            getColumn("Status").setCellEditor(new DefaultCellEditor(statusesComboBox));
-            getColumn("Kategoria").setCellEditor(new DefaultCellEditor(categoriesComboBox));
+        JComboBox statusesComboBox = prepareComboBox(statusesResultSet);
+        JComboBox categoriesComboBox = prepareComboBox(categoriesResultSet);
+        getColumn("Status").setCellEditor(new DefaultCellEditor(statusesComboBox));
+        getColumn("Kategoria").setCellEditor(new DefaultCellEditor(categoriesComboBox));
+        setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
     }
 
     private JComboBox prepareComboBox(ResultSet resultSet) {
